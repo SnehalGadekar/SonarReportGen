@@ -1,0 +1,5 @@
+aws s3 sync s3://lh-ngr-tst/ngrlogs
+
+aws s3 cp s3://lh-ngr-tst/ folder --exclude "*" --include "2015-08-15*" --recursive
+
+aws s3 cp s3://lh-ngr-tst . --recursive
