@@ -26,7 +26,7 @@ client.builder().password(password);
 IssueClient issueClient = client.issueClient();
 
 IssueQuery query = IssueQuery.create();
-query.severities("BLOCKER","CRITICAL","MAJOR");
+query.severities("BLOCKER","CRITICAL","MAJOR","INFO","MINOR");
 //query.severities("INFO");
 query.resolved(false);
 
@@ -40,7 +40,10 @@ List<Issue> issues =new LinkedList<Issue>();
             result = issueClient.find(query);
             for(Issue issue:result.list()) 
 			{
+		if(issue.projectKey().equals(args[0]))
+            	{
               issues.add(issue);
+		}
             }
             pageIndex++;
         }
@@ -50,13 +53,13 @@ List<Issue> issues =new LinkedList<Issue>();
     //    System.out.println("result.paging().total() :"+result.paging().total());
 	System.out.println("Total Rows :"+issues.size());
 	
-	createExcel(issues);
+	createExcel(issues,args[0]);
 }
 
-private static void createExcel(List<Issue> issueList) {
+private static void createExcel(List<Issue> issueList,String reportName) {
 
 try {
-String filename = "/opt/SonarReport/NGRSonarReport.xls";
+String filename = "/opt/jenkins/sonarqube-6.7.5/reports/"+reportName+".xls";
 
 HSSFWorkbook workbook = new HSSFWorkbook();
 HSSFSheet sheet = workbook.createSheet("FirstSheet");
