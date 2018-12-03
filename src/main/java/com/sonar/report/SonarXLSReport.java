@@ -65,24 +65,48 @@ HSSFWorkbook workbook = new HSSFWorkbook();
 HSSFSheet sheet = workbook.createSheet("FirstSheet");
 
 HSSFRow rowhead = sheet.createRow((short) 0);
-rowhead.createCell(0).setCellValue("Project Key");
+/*rowhead.createCell(0).setCellValue("Project Key");
 rowhead.createCell(1).setCellValue("Component");
 rowhead.createCell(2).setCellValue("Line");
 rowhead.createCell(3).setCellValue("Rule Key");
 rowhead.createCell(4).setCellValue("Severity");
 rowhead.createCell(5).setCellValue("Resolutions");
-rowhead.createCell(6).setCellValue("Message");
+rowhead.createCell(6).setCellValue("Message");*/
+
+rowhead.createCell(0).setCellValue("ProjectKey/JiraID");
+rowhead.createCell(1).setCellValue("TestCaseID");
+rowhead.createCell(2).setCellValue("Action");
+rowhead.createCell(4).setCellValue("TestResult");
+rowhead.createCell(5).setCellValue("Description");
+rowhead.createCell(6).setCellValue("Reporter");
+rowhead.createCell(7).setCellValue("Assignee");
+rowhead.createCell(8).setCellValue("Status");
+rowhead.createCell(9).setCellValue("Priority");
+rowhead.createCell(10).setCellValue("Comment");
+rowhead.createCell(11).setCellValue("Line");
+rowhead.createCell(12).setCellValue("Rule Key");
+rowhead.createCell(13).setCellValue("Severity");
+rowhead.createCell(14).setCellValue("Resolutions");
 
 for (int i = 0; i < issueList.size(); i++) {
 HSSFRow row = sheet.createRow((short) i+1);
 row.createCell(0).setCellValue(issueList.get(i).projectKey());
+row.createCell(2).setCellValue(issueList.get(i).componentKey());
+row.createCell(4).setCellValue("fail");
+row.createCell(5).setCellValue("Create JIRA Defect");
+row.createCell(10).setCellValue(issueList.get(i).message());
+row.createCell(11).setCellValue(String.valueOf(issueList.get(i).line()));
+row.createCell(12).setCellValue(issueList.get(i).ruleKey());
+row.createCell(13).setCellValue(issueList.get(i).severity());
+row.createCell(14).setCellValue(issueList.get(i).resolution());
+/*row.createCell(0).setCellValue(issueList.get(i).projectKey());
 row.createCell(1).setCellValue(issueList.get(i).componentKey());
 row.createCell(2).setCellValue(
 String.valueOf(issueList.get(i).line()));
 row.createCell(3).setCellValue(issueList.get(i).ruleKey());
 row.createCell(4).setCellValue(issueList.get(i).severity());
 row.createCell(5).setCellValue(issueList.get(i).resolution());
-row.createCell(6).setCellValue(issueList.get(i).message());
+row.createCell(6).setCellValue(issueList.get(i).message());*/
 }
 
 FileOutputStream fileOut = new FileOutputStream(filename);
